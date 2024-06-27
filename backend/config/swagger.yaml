@@ -1,0 +1,72 @@
+openapi: 3.0.0
+info:
+  title: Event Management API
+  version: 1.0.0
+  description: API para gerenciamento de eventos e participantes
+paths:
+  /api/auth/register:
+    post:
+      summary: Registrar um novo usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                username:
+                  type: string
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '201':
+          description: Usuário registrado com sucesso
+        '400':
+          description: Erro ao registrar usuário
+  /api/auth/login:
+    post:
+      summary: Login de um usuário
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                password:
+                  type: string
+      responses:
+        '200':
+          description: Login bem-sucedido
+        '401':
+          description: Credenciais inválidas
+  /api/events:
+    get:
+      summary: Listar todos os eventos
+      responses:
+        '200':
+          description: Lista de eventos
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    title:
+                      type: string
+                    description:
+                      type: string
+                    date:
+                      type: string
+                      format: date-time
+                    location:
+                      type: string
+                    organizer:
+                      type: string
+        '400':
+          description: Erro ao obter eventos
